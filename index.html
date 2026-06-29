@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salim Mabed — Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1525;
+      --card: #131929;
+      --border: #1e2d4a;
+      --accent: #4f8ef7;
+      --accent2: #7c5cbf;
+      --gradient: linear-gradient(135deg, #4f8ef7, #7c5cbf);
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: all .3s;
+    }
+
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: color .2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gradient);
+      transition: width .3s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      padding: .5rem 1.2rem;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      color: var(--accent) !important;
+      font-size: .85rem !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: var(--white) !important;
+    }
+
+    /* ── BURGER ── */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .burger span {
+      width: 24px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: .3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 600px at 70% 50%, rgba(79,142,247,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 400px at 20% 80%, rgba(124,92,191,0.06) 0%, transparent 70%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .3rem .8rem;
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.3);
+      border-radius: 20px;
+      font-size: .8rem;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-badge span { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .hero-title .name {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .hero-subtitle .typed-cursor {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+    .hero-desc {
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: .75rem 1.8rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: .9rem;
+      text-decoration: none;
+      transition: all .3s;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: var(--white);
+      border: none;
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(79,142,247,0.3); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-socials {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hero-socials a {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all .3s;
+    }
+
+    .hero-socials a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* ── AVATAR CARD ── */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 320px;
+      height: 380px;
+    }
+
+    .avatar-card {
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .avatar-initials {
+      font-size: 5rem;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .avatar-decoration {
+      position: absolute;
+      border-radius: 16px;
+      border: 1px solid rgba(79,142,247,0.2);
+    }
+
+    .deco1 { width: 340px; height: 400px; top: -10px; left: -10px; }
+    .deco2 { width: 360px; height: 420px; top: -20px; left: -20px; opacity: .5; }
+
+    .floating-tag {
+      position: absolute;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .5rem .8rem;
+      font-size: .78rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      white-space: nowrap;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .tag1 { top: 20px; right: -20px; color: #22c55e; animation-delay: 0s; }
+    .tag2 { bottom: 60px; left: -30px; color: var(--accent); animation-delay: 1.5s; }
+    .tag3 { bottom: 10px; right: 10px; color: #f59e0b; animation-delay: .8s; }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 5rem 5%; }
+
+    .section-label {
+      font-family: 'Fira Code', monospace;
+      font-size: .85rem;
+      color: var(--accent);
+      margin-bottom: .5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      margin-bottom: .5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .section-line {
+      width: 50px; height: 3px;
+      background: var(--gradient);
+      border-radius: 2px;
+      margin-bottom: 3rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p { color: var(--muted); margin-bottom: 1rem; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+
+    .about-qualities {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .quality-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color .3s;
+    }
+
+    .quality-item:hover { border-color: var(--accent); }
+
+    .quality-icon {
+      width: 40px; height: 40px;
+      background: rgba(79,142,247,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .quality-title { font-weight: 600; font-size: .95rem; }
+    .quality-desc { font-size: .8rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: border-color .3s, transform .3s;
+    }
+
+    .skill-category:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+    .skill-cat-header {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-cat-icon {
+      width: 36px; height: 36px;
+      background: var(--gradient);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: .9rem;
+    }
+
+    .skill-cat-name { font-weight: 700; font-size: .95rem; }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .skill-tag {
+      padding: .3rem .7rem;
+      background: rgba(79,142,247,0.08);
+      border: 1px solid rgba(79,142,247,0.2);
+      border-radius: 6px;
+      font-size: .78rem;
+      color: var(--accent);
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg2); }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.55rem;
+      top: .4rem;
+      width: 12px; height: 12px;
+      background: var(--gradient);
+      border-radius: 50%;
+      border: 2px solid var(--bg2);
+    }
+
+    .timeline-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: border-color .3s;
+    }
+
+    .timeline-card:hover { border-color: var(--accent); }
+
+    .timeline-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: .8rem;
+    }
+
+    .timeline-title { font-weight: 700; font-size: 1rem; }
+    .timeline-company { color: var(--accent); font-size: .9rem; font-weight: 600; }
+
+    .timeline-meta {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .timeline-date {
+      font-family: 'Fira Code', monospace;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .badge {
+      padding: .2rem .6rem;
+      border-radius: 20px;
+      font-size: .7rem;
+      font-weight: 600;
+    }
+
+    .badge-full { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+    .badge-part { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+    .badge-award { background: rgba(124,92,191,0.15); color: #a78bfa; border: 1px solid rgba(124,92,191,0.3); }
+
+    .timeline-desc { color: var(--muted); font-size: .88rem; }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .3s, transform .3s;
+    }
+
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .project-icon {
+      width: 44px; height: 44px;
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .project-links { display: flex; gap: .5rem; }
+
+    .project-link {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+      transition: all .3s;
+    }
+
+    .project-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    .project-name { font-weight: 700; font-size: 1rem; margin-bottom: .5rem; }
+    .project-desc { color: var(--muted); font-size: .85rem; flex: 1; margin-bottom: 1rem; }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .stack-tag {
+      padding: .2rem .6rem;
+      background: rgba(124,92,191,0.08);
+      border: 1px solid rgba(124,92,191,0.2);
+      border-radius: 6px;
+      font-size: .72rem;
+      color: #a78bfa;
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    #certifications { background: var(--bg2); }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .cert-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.3rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: border-color .3s;
+    }
+
+    .cert-card:hover { border-color: var(--accent); }
+
+    .cert-icon {
+      width: 44px; height: 44px;
+      flex-shrink: 0;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .cert-name { font-weight: 700; font-size: .88rem; margin-bottom: .3rem; }
+    .cert-issuer { font-size: .78rem; color: var(--accent); }
+    .cert-topics { font-size: .75rem; color: var(--muted); margin-top: .3rem; }
+
+    /* ── EDUCATION ── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+    }
+
+    .edu-card:hover { border-color: var(--accent); }
+
+    .edu-degree { font-size: 1.05rem; font-weight: 700; margin-bottom: .3rem; }
+    .edu-school { color: var(--accent); font-weight: 600; font-size: .9rem; margin-bottom: .3rem; }
+    .edu-location { color: var(--muted); font-size: .82rem; display: flex; align-items: center; gap: .4rem; }
+    .edu-years {
+      display: inline-block;
+      margin-top: .8rem;
+      padding: .3rem .8rem;
+      background: rgba(79,142,247,0.1);
+      border-radius: 20px;
+      font-family: 'Fira Code', monospace;
+      font-size: .78rem;
+      color: var(--accent);
+    }
+
+    /* ── LANGUAGES ── */
+    .langs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .lang-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .lang-flag { font-size: 2rem; margin-bottom: .5rem; }
+    .lang-name { font-weight: 700; font-size: .95rem; }
+    .lang-level { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+
+    .lang-bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: .8rem;
+      overflow: hidden;
+    }
+
+    .lang-fill {
+      height: 100%;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info p { color: var(--muted); margin-bottom: 2rem; }
+
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color .3s, transform .2s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+
+    .contact-link-icon {
+      width: 40px; height: 40px;
+      background: rgba(79,142,247,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .contact-link-label { font-size: .78rem; color: var(--muted); }
+    .contact-link-value { font-weight: 600; font-size: .9rem; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+
+    .form-group label { font-size: .85rem; color: var(--muted); font-weight: 500; }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .3s;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+
+    .form-group textarea { min-height: 120px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 5%;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    footer span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .burger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: var(--bg2);
+        padding: 1rem 5%;
+        border-bottom: 1px solid var(--border);
+        gap: 1rem;
+      }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: repeat(3,1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">SM.</div>
+  <button class="burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#experience">Expériences</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span></span>
+        Disponible — Open to opportunities
+      </div>
+      <h1 class="hero-title">
+        Salim<br /><span class="name">Mabed</span>
+      </h1>
+      <p class="hero-subtitle">
+        &gt; <span id="typed"></span><span class="typed-cursor">|</span>
+      </p>
+      <p class="hero-desc">
+        Software Engineer à la Banque d'Algérie, passionné par l'IA, la data science et le développement.
+        Double expertise technique &amp; RH pour créer des solutions innovantes.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> Voir mes projets</a>
+        <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Me contacter</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://github.com/SalimMabed" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/salim-mabed" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:mabedsalim2019@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+213674523850" title="Phone"><i class="fas fa-phone"></i></a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-wrapper">
+        <div class="avatar-decoration deco2"></div>
+        <div class="avatar-decoration deco1"></div>
+        <div class="avatar-card">
+          <div class="avatar-initials">SM</div>
+        </div>
+        <div class="floating-tag tag1"><i class="fas fa-robot"></i> AI Enthusiast</div>
+        <div class="floating-tag tag2"><i class="fas fa-code"></i> Software Engineer</div>
+        <div class="floating-tag tag3"><i class="fas fa-trophy"></i> CESI AI Winner</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label fade-in">// 01. à propos</p>
+    <h2 class="section-title fade-in">Qui suis-je ?</h2>
+    <div class="section-line fade-in"></div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>
+          Je suis <strong>Salim Mabed</strong>, Software Engineer à la Banque d'Algérie et Talent Acquisition Manager
+          (part-time) chez Systelium. Diplômé d'un Master en Systèmes Informatiques Intelligents de
+          l'Université Mouloud Mammeri de Tizi Ouzou.
+        </p>
+        <p>
+          Passionné par l'<strong>Intelligence Artificielle</strong>, la <strong>data science</strong> et le développement logiciel,
+          j'ai une double expertise technique et RH qui me permet de créer des solutions innovantes
+          tout en accompagnant les équipes IT dans leur croissance.
+        </p>
+        <p>
+          En dehors du travail, je suis conférencier (DevFest 2022 &amp; 2023), formateur Python,
+          amateur d'échecs, de philosophie et des sciences en général.
+        </p>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-number">3+</div>
+            <div class="stat-label">ans d'expérience</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">projets réalisés</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-label">certifications</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-qualities">
+        <div class="quality-item">
+          <div class="quality-icon"><i class="fas fa-user-astronaut"></i></div>
+          <div>
+            <div class="quality-title">Autonome</div>
+            <div class="quality-desc">Capable de gérer des projets de bout en bout de façon indépendante</div>
+          </div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-icon"><i class="fas fa-rocket"></i></div>
+          <div>
+            <div class="quality-title">Ambitieux</div>
+            <div class="quality-desc">Toujours en quête de nouveaux défis et d'apprentissage continu</div>
+          </div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-icon"><i class="fas fa-lightbulb"></i></div>
+          <div>
+            <div class="quality-title">Esprit d'initiative</div>
+            <div class="quality-desc">Proactif, je propose des solutions avant même qu'on me le demande</div>
+          </div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-icon"><i class="fas fa-users"></i></div>
+          <div>
+            <div class="quality-title">Travail en équipe</div>
+            <div class="quality-desc">Collaboratif et communicatif, je valorise l'intelligence collective</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label fade-in">// 02. compétences</p>
+    <h2 class="section-title fade-in">Stack technique</h2>
+    <div class="section-line fade-in"></div>
+    <div class="skills-grid fade-in">
+      <div class="skill-category">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><i class="fas fa-brain"></i></div>
+          <div class="skill-cat-name">IA &amp; Machine Learning</div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">BERT</span>
+          <span class="skill-tag">GPT-2</span>
+          <span class="skill-tag">NLP</span>
+          <span class="skill-tag">Deep Learning</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">Matlab</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><i class="fas fa-mobile-alt"></i></div>
+          <div class="skill-cat-name">Développement Mobile</div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Flutter</span>
+          <span class="skill-tag">Dart</span>
+          <span class="skill-tag">Firebase</span>
+          <span class="skill-tag">Figma</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><i class="fas fa-globe"></i></div>
+          <div class="skill-cat-name">Développement Web</div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">WordPress</span>
+          <span class="skill-tag">Elementor</span>
+          <span class="skill-tag">Spectra</span>
+          <span class="skill-tag">SureForms</span>
+          <span class="skill-tag">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><i class="fas fa-database"></i></div>
+          <div class="skill-cat-name">Data &amp; Outils</div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">Web Scraping</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">LaTeX</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Canva</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label fade-in">// 03. expériences</p>
+    <h2 class="section-title fade-in">Parcours professionnel</h2>
+    <div class="section-line fade-in"></div>
+    <div class="timeline fade-in">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-title">Software Engineer</div>
+              <div class="timeline-company">Banque d'Algérie</div>
+            </div>
+            <div class="timeline-meta">
+              <span class="badge badge-full">Full-time</span>
+              <span class="timeline-date">Juillet 2025 — présent</span>
+            </div>
+          </div>
+          <p class="timeline-desc">
+            Analyse des solutions existantes, participation à leur évolution et contribution au développement
+            et à l'intégration de systèmes critiques au sein de la Banque Centrale.
+            Étude des besoins métiers, analyse fonctionnelle et technique, amélioration de la fiabilité,
+            de la sécurité et de la performance des applications dans un environnement fortement réglementé.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-title">Technical Talent Acquisition Manager</div>
+              <div class="timeline-company">Systelium</div>
+            </div>
+            <div class="timeline-meta">
+              <span class="badge badge-part">Part-time</span>
+              <span class="timeline-date">Oct. 2025 — Mars 2026</span>
+            </div>
+          </div>
+          <p class="timeline-desc">
+            Identification, sourcing et recrutement de profils techniques IT. Collaboration étroite avec les
+            équipes projets pour aligner les compétences des talents avec les besoins techniques et organisationnels.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-title">Auto-entrepreneur</div>
+              <div class="timeline-company">Indépendant</div>
+            </div>
+            <div class="timeline-meta">
+              <span class="timeline-date">Fév. 2025 — présent</span>
+            </div>
+          </div>
+          <p class="timeline-desc">
+            Développement web et solutions digitales pour des clients variés. Conception et déploiement
+            de sites et d'outils sur mesure.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-title">Lauréat — 1ère place</div>
+              <div class="timeline-company">CESI AI Challenge (2ème édition)</div>
+            </div>
+            <div class="timeline-meta">
+              <span class="badge badge-award"><i class="fas fa-trophy"></i> Prix</span>
+              <span class="timeline-date">Mai 2024</span>
+            </div>
+          </div>
+          <p class="timeline-desc">
+            En collaboration avec Salem Hammadi, développement du meilleur agent capable de naviguer dans
+            un labyrinthe, collecter des points et éviter des obstacles via diverses stratégies et algorithmes.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-title">Conférencier — IA &amp; NLP</div>
+              <div class="timeline-company">DevFest — Google Developer Group Tizi Ouzou</div>
+            </div>
+            <div class="timeline-meta">
+              <span class="timeline-date">2022 &amp; 2023</span>
+            </div>
+          </div>
+          <p class="timeline-desc">
+            Présentations sur l'intelligence artificielle (2022) et le traitement du langage naturel (2023),
+            mettant l'accent sur les avancées, les applications pratiques et les tendances futures.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-title">Formateur Python</div>
+              <div class="timeline-company">Google Developer Student Club — Tizi Ouzou</div>
+            </div>
+            <div class="timeline-meta">
+              <span class="timeline-date">2022 — 2023</span>
+            </div>
+          </div>
+          <p class="timeline-desc">
+            Animation de séances hebdomadaires (présentiel &amp; en ligne), conception et délivrance de leçons
+            complètes sur Python, favorisant un environnement d'apprentissage collaboratif.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label fade-in">// 04. projets</p>
+    <h2 class="section-title fade-in">Réalisations</h2>
+    <div class="section-line fade-in"></div>
+    <div class="projects-grid fade-in">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">🩸</div>
+          <div class="project-links">
+            <a href="https://github.com/SalimMabed" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="project-name">Pulse — Application mobile</div>
+        <p class="project-desc">
+          Solution pour faciliter les dons de sang développée pour le Google Solution Challenge 2023.
+          Système intégré optimisant la collecte et la distribution des dons via la technologie.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Flutter</span>
+          <span class="stack-tag">Dart</span>
+          <span class="stack-tag">Firebase</span>
+          <span class="stack-tag">Figma</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">🔋</div>
+          <div class="project-links">
+            <a href="https://github.com/SalimMabed" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="project-name">Estimation état de santé — Batteries Li-ion</div>
+        <p class="project-desc">
+          Mémoire de Master : modèle d'apprentissage par ensemble pour prédire l'état de santé des
+          batteries Li-ion basé sur le dataset du Toyota Research Institute.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Matlab</span>
+          <span class="stack-tag">TensorFlow</span>
+          <span class="stack-tag">Pandas</span>
+          <span class="stack-tag">LaTeX</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">🤖</div>
+          <div class="project-links">
+            <a href="https://github.com/SalimMabed" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="project-name">Création de Chatbots — NLP</div>
+        <p class="project-desc">
+          Discussion interactive entre deux chatbots utilisant des modèles de pointe (BERT, GPT-2)
+          capables d'échanger des réponses de manière naturelle.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">PyTorch</span>
+          <span class="stack-tag">BERT</span>
+          <span class="stack-tag">GPT-2</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">🌐</div>
+          <div class="project-links">
+            <a href="https://pole-savoir-amari.com" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+        <div class="project-name">pole-savoir-amari.com</div>
+        <p class="project-desc">
+          Conception et développement du site web de l'établissement avec interface intuitive pour
+          présenter les formations. Optimisation UX et navigation.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">WordPress</span>
+          <span class="stack-tag">Elementor</span>
+          <span class="stack-tag">Spectra</span>
+          <span class="stack-tag">SureForms</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <p class="section-label fade-in">// 05. certifications</p>
+    <h2 class="section-title fade-in">Formation continue</h2>
+    <div class="section-line fade-in"></div>
+    <div class="certs-grid fade-in">
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-python"></i></div>
+        <div>
+          <div class="cert-name">Python for Everybody</div>
+          <div class="cert-issuer">Coursera / University of Michigan</div>
+          <div class="cert-topics">Data structures · Web scraping · Bases de données · Analyse de données</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-robot"></i></div>
+        <div>
+          <div class="cert-name">Introduction to AI</div>
+          <div class="cert-issuer">Coursera / IBM</div>
+          <div class="cert-topics">Concepts · Impact · Éthique · Limites</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-network-wired"></i></div>
+        <div>
+          <div class="cert-name">Fundamentals of Deep Learning</div>
+          <div class="cert-issuer">Nvidia</div>
+          <div class="cert-topics">Réseaux de neurones · Traitement d'images · CNNs</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-chart-line"></i></div>
+        <div>
+          <div class="cert-name">Financial Literacy Training</div>
+          <div class="cert-issuer">HSBC / World Learning</div>
+          <div class="cert-topics">Budgeting · Épargne · Décisions financières</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <p class="section-label fade-in">// 06. éducation</p>
+    <h2 class="section-title fade-in">Formation académique</h2>
+    <div class="section-line fade-in"></div>
+    <div class="edu-grid fade-in">
+
+      <div class="edu-card">
+        <div class="edu-degree">Master — Systèmes Informatiques Intelligents</div>
+        <div class="edu-school">Université Mouloud Mammeri</div>
+        <div class="edu-location"><i class="fas fa-map-marker-alt"></i> Tizi Ouzou, Algérie</div>
+        <div class="edu-years">2022 — 2024</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Licence — Systèmes Informatiques</div>
+        <div class="edu-school">Université Mouloud Mammeri</div>
+        <div class="edu-location"><i class="fas fa-map-marker-alt"></i> Tizi Ouzou, Algérie</div>
+        <div class="edu-years">2019 — 2022</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages" style="background: var(--bg2);">
+  <div class="section-inner">
+    <p class="section-label fade-in">// 07. langues</p>
+    <h2 class="section-title fade-in">Communication</h2>
+    <div class="section-line fade-in"></div>
+    <div class="langs-grid fade-in">
+      <div class="lang-card">
+        <div class="lang-flag">🏔️</div>
+        <div class="lang-name">Kabyle</div>
+        <div class="lang-level">Langue maternelle</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flag">🇩🇿</div>
+        <div class="lang-name">Arabe</div>
+        <div class="lang-level">Niveau avancé</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:90%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flag">🇫🇷</div>
+        <div class="lang-name">Français</div>
+        <div class="lang-level">Niveau avancé</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:90%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flag">🇬🇧</div>
+        <div class="lang-name">Anglais</div>
+        <div class="lang-level">Niveau intermédiaire</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:60%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label fade-in">// 08. contact</p>
+    <h2 class="section-title fade-in">Travaillons ensemble</h2>
+    <div class="section-line fade-in"></div>
+    <div class="contact-grid fade-in">
+      <div class="contact-info">
+        <p>
+          Vous avez un projet en tête, une opportunité à partager, ou simplement envie d'échanger ?
+          N'hésitez pas à me contacter — je réponds toujours.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:mabedsalim2019@gmail.com" class="contact-link">
+            <div class="contact-link-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-value">mabedsalim2019@gmail.com</div>
+            </div>
+          </a>
+          <a href="tel:+213674523850" class="contact-link">
+            <div class="contact-link-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <div class="contact-link-label">Téléphone</div>
+              <div class="contact-link-value">+213 674 52 38 50</div>
+            </div>
+          </a>
+          <a href="https://github.com/SalimMabed" target="_blank" class="contact-link">
+            <div class="contact-link-icon"><i class="fab fa-github"></i></div>
+            <div>
+              <div class="contact-link-label">GitHub</div>
+              <div class="contact-link-value">SalimMabed</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/salim-mabed" target="_blank" class="contact-link">
+            <div class="contact-link-icon"><i class="fab fa-linkedin-in"></i></div>
+            <div>
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-value">Salim Mabed</div>
+            </div>
+          </a>
+          <div class="contact-link" style="cursor:default;">
+            <div class="contact-link-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <div class="contact-link-label">Localisation</div>
+              <div class="contact-link-value">Tizi Ouzou, Algérie</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>Nom complet</label>
+          <input type="text" placeholder="Votre nom" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="votre@email.com" required />
+        </div>
+        <div class="form-group">
+          <label>Sujet</label>
+          <input type="text" placeholder="Objet de votre message" required />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Votre message..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+          <i class="fas fa-paper-plane"></i> Envoyer le message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Conçu &amp; développé par <span>Salim Mabed</span> · 2025</p>
+  <p style="margin-top:.5rem; font-size:.78rem;">Tizi Ouzou, Algérie 🇩🇿</p>
+</footer>
+
+<script>
+  // Typed effect
+  const phrases = [
+    'Software Engineer',
+    'AI Enthusiast',
+    'Data Scientist',
+    'Talent Acquisition Manager',
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typed');
+
+  function type() {
+    const word = phrases[pi];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 60 : 100);
+  }
+  type();
+
+  // Burger menu
+  document.getElementById('burger').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Staggered children
+  document.querySelectorAll('.skills-grid, .projects-grid, .certs-grid, .edu-grid, .langs-grid').forEach(grid => {
+    [...grid.children].forEach((child, i) => {
+      child.style.transitionDelay = `${i * 80}ms`;
+      child.classList.add('fade-in');
+      observer.observe(child);
+    });
+  });
+
+  // Form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('[type=submit]');
+    btn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
+    btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer le message';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.boxShadow =
+      window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.4)' : 'none';
+  });
+</script>
+</body>
+</html>
