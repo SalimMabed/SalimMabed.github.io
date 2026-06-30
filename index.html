@@ -1040,85 +1040,6 @@
 
     .testimonial-stars i { color: #f59e0b; font-size: .75rem; }
 
-    /* ── LINKEDIN ACTIVITY ── */
-    #linkedin-activity { background: var(--bg2); }
-
-    .linkedin-post-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.6rem;
-      max-width: 680px;
-      margin: 0 auto;
-      transition: border-color .3s, transform .3s;
-    }
-
-    .linkedin-post-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-
-    .linkedin-post-header {
-      display: flex;
-      align-items: center;
-      gap: .9rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .linkedin-avatar-sm {
-      width: 46px; height: 46px;
-      border-radius: 50%;
-      background: var(--gradient);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: .85rem; color: #fff;
-      flex-shrink: 0;
-    }
-
-    .linkedin-author-name { font-weight: 700; font-size: .9rem; }
-    .linkedin-author-title { font-size: .75rem; color: var(--muted); }
-
-    .linkedin-brand-icon {
-      margin-left: auto;
-      font-size: 1.5rem;
-      color: #0a66c2;
-    }
-
-    .linkedin-post-text {
-      color: var(--text);
-      font-size: .88rem;
-      line-height: 1.75;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .linkedin-post-footer {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 1.2rem;
-      padding-top: .9rem;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-
-    .linkedin-reactions { font-size: .8rem; color: var(--muted); display: flex; align-items: center; gap: .3rem; }
-    .linkedin-reactions i { color: #0a66c2; }
-    .linkedin-post-date { font-size: .75rem; color: var(--muted); font-family: 'Fira Code', monospace; }
-
-    .linkedin-view-btn {
-      margin-left: auto;
-      display: inline-flex; align-items: center; gap: .4rem;
-      padding: .45rem 1rem;
-      background: transparent;
-      border: 1px solid #0a66c2;
-      border-radius: 20px;
-      color: #0a66c2;
-      font-size: .78rem; font-weight: 600;
-      text-decoration: none;
-      transition: background .2s, color .2s;
-    }
-
-    .linkedin-view-btn:hover { background: #0a66c2; color: #fff; }
-
-    #linkedin-post-loading { text-align: center; color: var(--muted); font-size: .85rem; padding: 2rem 0; }
-
     /* ── BACK TO TOP ── */
     #back-top {
       position: fixed;
@@ -1831,42 +1752,10 @@
   </div>
 </section>
 
-<!-- ══ LINKEDIN ACTIVITY ══ -->
-<section id="linkedin-activity">
-  <div class="section-inner">
-    <p class="section-label reveal">// 09. activité</p>
-    <h2 class="section-title reveal">Dernière publication</h2>
-    <div class="section-line reveal"></div>
-    <div id="linkedin-post-container">
-      <p id="linkedin-post-loading"><i class="fas fa-spinner fa-spin"></i> Chargement…</p>
-      <div class="linkedin-post-card reveal" id="linkedin-post-card" style="display:none;">
-        <div class="linkedin-post-header">
-          <div class="linkedin-avatar-sm">SM</div>
-          <div>
-            <div class="linkedin-author-name">Salim Mabed</div>
-            <div class="linkedin-author-title">Software Engineer · Banque d'Algérie</div>
-          </div>
-          <i class="fab fa-linkedin linkedin-brand-icon"></i>
-        </div>
-        <p class="linkedin-post-text" id="linkedin-post-text"></p>
-        <div class="linkedin-post-footer">
-          <span class="linkedin-reactions" id="linkedin-reactions" style="display:none;">
-            <i class="fas fa-thumbs-up"></i> <span id="linkedin-reactions-count"></span>
-          </span>
-          <span class="linkedin-post-date" id="linkedin-post-date"></span>
-          <a class="linkedin-view-btn" id="linkedin-post-link" href="https://www.linkedin.com/in/salim-mabed-27308a227/" target="_blank" rel="noopener">
-            <i class="fab fa-linkedin"></i> Voir sur LinkedIn
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ══ CONTACT ══ -->
 <section id="contact">
   <div class="section-inner">
-    <p class="section-label reveal">// 10. contact</p>
+    <p class="section-label reveal">// 09. contact</p>
     <h2 class="section-title reveal">Travaillons ensemble</h2>
     <div class="section-line reveal"></div>
     <div class="contact-grid">
@@ -2143,55 +2032,6 @@ window.addEventListener('scroll', () => {
     window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,.5)' : 'none';
 }, { passive: true });
 
-// ── LinkedIn latest post ──
-(function () {
-  // ← remplace par ton URL Vercel après le déploiement
-  const VERCEL_URL = 'https://linkedin-proxy-salim.vercel.app/api/post';
-
-  const card    = document.getElementById('linkedin-post-card');
-  const loading = document.getElementById('linkedin-post-loading');
-  const textEl  = document.getElementById('linkedin-post-text');
-  const dateEl  = document.getElementById('linkedin-post-date');
-  const linkEl  = document.getElementById('linkedin-post-link');
-  const reactEl = document.getElementById('linkedin-reactions');
-  const reactCount = document.getElementById('linkedin-reactions-count');
-
-  fetch(VERCEL_URL)
-    .then(r => r.json())
-    .then(data => {
-      loading.style.display = 'none';
-      if (!data.post) return;
-
-      const p = data.post;
-
-      // Text (truncate at 600 chars with "...")
-      const full = p.text || '';
-      if (full.length > 600) {
-        const short = full.slice(0, 600);
-        textEl.textContent = short + '…';
-      } else {
-        textEl.textContent = full;
-      }
-
-      // Date
-      if (p.created_at) {
-        const d = new Date(p.created_at * 1000);
-        dateEl.textContent = d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
-      }
-
-      // Reactions
-      if (p.reactions > 0) {
-        reactCount.textContent = p.reactions;
-        reactEl.style.display = 'flex';
-      }
-
-      // Link
-      if (p.url) linkEl.href = p.url;
-
-      card.style.display = 'block';
-    })
-    .catch(() => { loading.style.display = 'none'; });
-})();
 </script>
 </body>
 </html>
