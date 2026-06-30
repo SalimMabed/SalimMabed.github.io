@@ -1,0 +1,40 @@
+name: Update Latest LinkedIn Post
+
+on:
+  schedule:
+    # Runs at 07:00, 13:00, 19:00 UTC every day
+    - cron: '0 7,13,19 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install linkedin-api
+        run: pip install linkedin-api
+
+      - name: Fetch latest LinkedIn post
+        env:
+          LINKEDIN_EMAIL: ${{ secrets.LINKEDIN_EMAIL }}
+          LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
+        run: python scripts/fetch_linkedin.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add latest-post.json
+          git diff --staged --quiet || git commit -m "chore: update latest LinkedIn post [skip ci]"
+          git push
