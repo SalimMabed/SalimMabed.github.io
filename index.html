@@ -803,6 +803,9 @@
     .cert-name { font-weight: 700; font-size: .87rem; margin-bottom: .2rem; }
     .cert-issuer { font-size: .76rem; color: var(--accent); }
     .cert-topics { font-size: .73rem; color: var(--muted); margin-top: .3rem; line-height: 1.5; }
+    .cert-date { font-size: .7rem; color: var(--muted); margin-top: .25rem; font-family: 'Fira Code', monospace; }
+    .cert-link { display: inline-flex; align-items: center; gap: .3rem; margin-top: .5rem; font-size: .72rem; color: var(--accent); text-decoration: none; border: 1px solid rgba(79,142,247,.3); border-radius: 6px; padding: .2rem .5rem; transition: background .2s; }
+    .cert-link:hover { background: rgba(79,142,247,.1); }
 
     /* ── EDUCATION ── */
     .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
@@ -1200,7 +1203,7 @@
             <div class="stat-label">projets réalisés</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number" data-target="4">0</div>
+            <div class="stat-number" data-target="13">0</div>
             <div class="stat-label">certifications</div>
           </div>
         </div>
@@ -1486,35 +1489,130 @@
     <div class="section-line reveal"></div>
     <div class="certs-grid">
       <div class="cert-card reveal">
-        <div class="cert-icon"><i class="fas fa-python"></i></div>
+        <div class="cert-icon"><i class="fas fa-money-bill-transfer"></i></div>
         <div>
-          <div class="cert-name">Python for Everybody</div>
-          <div class="cert-issuer">Coursera / University of Michigan</div>
-          <div class="cert-topics">Data structures · Web scraping · Bases de données · Analyse de données</div>
+          <div class="cert-name">ISO 20022</div>
+          <div class="cert-issuer">Banking Intelligence Consulting — BIC</div>
+          <div class="cert-topics">SWIFT Payments · SWIFTNet · Messagerie financière</div>
+          <div class="cert-date">Janv. 2026</div>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="fas fa-code"></i></div>
+        <div>
+          <div class="cert-name">Introduction to Software Engineering</div>
+          <div class="cert-issuer">IBM</div>
+          <div class="cert-topics">Génie logiciel · Méthodes agiles · Architecture</div>
+          <div class="cert-date">Sept. 2025</div>
+          <a class="cert-link" href="https://www.coursera.org/account/accomplishments/records/OE0WX2S9IYCH" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="fab fa-python"></i></div>
+        <div>
+          <div class="cert-name">Python for Everybody Specialization</div>
+          <div class="cert-issuer">Coursera</div>
+          <div class="cert-topics">Python · Data structures · Web data · Databases</div>
+          <div class="cert-date">Août 2023</div>
+          <a class="cert-link" href="https://www.coursera.org/account/accomplishments/specialization/certificate/GT9N6CVZ6TJ8" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="fas fa-chart-bar"></i></div>
+        <div>
+          <div class="cert-name">Capstone: Retrieving, Processing &amp; Visualizing Data</div>
+          <div class="cert-issuer">Coursera</div>
+          <div class="cert-topics">Programmation · Visualisation · Analyse de données</div>
+          <div class="cert-date">Août 2023</div>
+          <a class="cert-link" href="https://www.coursera.org/account/accomplishments/certificate/ESQ3LJ4KHZ9B" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="fas fa-database"></i></div>
+        <div>
+          <div class="cert-name">Using Databases with Python</div>
+          <div class="cert-issuer">Coursera</div>
+          <div class="cert-topics">Bases de données relationnelles · SQL · SQLite</div>
+          <div class="cert-date">Août 2023</div>
+          <a class="cert-link" href="https://www.coursera.org/account/accomplishments/certificate/ZPP3J5TDM6QM" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="fas fa-globe"></i></div>
+        <div>
+          <div class="cert-name">Using Python to Access Web Data</div>
+          <div class="cert-issuer">Coursera</div>
+          <div class="cert-topics">Web scraping · APIs · Extraction de contenu web</div>
+          <div class="cert-date">Août 2023</div>
+          <a class="cert-link" href="https://www.coursera.org/account/accomplishments/certificate/2C9UUJ69SA2X" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="fas fa-shield-halved"></i></div>
+        <div>
+          <div class="cert-name">Cyber Security Operations</div>
+          <div class="cert-issuer">ICT Towers</div>
+          <div class="cert-topics">Cybersécurité · Opérations de sécurité · SOC</div>
+          <div class="cert-date">Sept. 2022</div>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="fas fa-brain"></i></div>
+        <div>
+          <div class="cert-name">Fundamentals of Deep Learning</div>
+          <div class="cert-issuer">NVIDIA</div>
+          <div class="cert-topics">Réseaux de neurones · CNNs · Traitement d'images</div>
+          <div class="cert-date">Nov. 2022</div>
+          <a class="cert-link" href="https://courses.nvidia.com/certificates/7d3d2fe509cf44339001a0162ea73fc6/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="fab fa-google"></i></div>
+        <div>
+          <div class="cert-name">Google Cloud Essentials</div>
+          <div class="cert-issuer">Google Cloud Skills Boost</div>
+          <div class="cert-topics">Cloud computing · GCP · Infrastructure</div>
+          <div class="cert-date">Sept. 2022</div>
+          <a class="cert-link" href="https://www.cloudskillsboost.google/public_profiles/98e6c2ef-3572-49d6-8951-9321682ff25f/badges/2607915" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
         </div>
       </div>
       <div class="cert-card reveal">
         <div class="cert-icon"><i class="fas fa-robot"></i></div>
         <div>
-          <div class="cert-name">Introduction to AI</div>
-          <div class="cert-issuer">Coursera / IBM</div>
-          <div class="cert-topics">Concepts · Impact · Éthique · Limites</div>
+          <div class="cert-name">Introduction to Artificial Intelligence (AI)</div>
+          <div class="cert-issuer">IBM</div>
+          <div class="cert-topics">Concepts IA · Impact · Éthique · Applications</div>
+          <div class="cert-date">Mai 2022</div>
+          <a class="cert-link" href="https://www.coursera.org/account/accomplishments/certificate/3QCF6Z66ECZU" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
         </div>
       </div>
       <div class="cert-card reveal">
-        <div class="cert-icon"><i class="fas fa-network-wired"></i></div>
+        <div class="cert-icon"><i class="fas fa-code-branch"></i></div>
         <div>
-          <div class="cert-name">Fundamentals of Deep Learning</div>
-          <div class="cert-issuer">Nvidia</div>
-          <div class="cert-topics">Réseaux de neurones · Traitement d'images · CNNs</div>
+          <div class="cert-name">Python Data Structures</div>
+          <div class="cert-issuer">Coursera</div>
+          <div class="cert-topics">Structures de données · Python · Algorithmique</div>
+          <div class="cert-date">Août 2022</div>
+          <a class="cert-link" href="https://www.coursera.org/account/accomplishments/certificate/M6D5A8MYNAFE" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
         </div>
       </div>
       <div class="cert-card reveal">
-        <div class="cert-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="cert-icon"><i class="fas fa-laptop-code"></i></div>
         <div>
-          <div class="cert-name">Financial Literacy Training</div>
-          <div class="cert-issuer">HSBC / World Learning</div>
-          <div class="cert-topics">Budgeting · Épargne · Décisions financières</div>
+          <div class="cert-name">Programming for Everybody (Getting Started with Python)</div>
+          <div class="cert-issuer">Coursera</div>
+          <div class="cert-topics">Python · Programmation · Fondamentaux</div>
+          <div class="cert-date">Févr. 2022</div>
+          <a class="cert-link" href="https://www.coursera.org/account/accomplishments/certificate/JA9BW6ZBV5VS" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Voir le diplôme</a>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div>
+          <div class="cert-name">Licence informatique — Systèmes d'informations</div>
+          <div class="cert-issuer">Université Mouloud Mammeri Tizi-Ouzou</div>
+          <div class="cert-topics">Développement web · Systèmes d'exploitation · Réseaux</div>
+          <div class="cert-date">Oct. 2019</div>
         </div>
       </div>
     </div>
