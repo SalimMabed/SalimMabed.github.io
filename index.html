@@ -775,6 +775,17 @@
 
     .stack-tag:hover { background: rgba(124,92,191,0.2); transform: scale(1.08); }
 
+    .project-confidential {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .2rem .6rem;
+      background: rgba(245,158,11,.08);
+      border: 1px solid rgba(245,158,11,.3);
+      border-radius: 20px;
+      font-size: .7rem; font-weight: 600;
+      color: #f59e0b;
+      font-family: 'Fira Code', monospace;
+    }
+
     /* ── CERTIFICATIONS ── */
     #certifications { background: var(--bg2); }
 
@@ -1475,6 +1486,21 @@
         <div class="project-stack">
           <span class="stack-tag">Python</span><span class="stack-tag">PyTorch</span>
           <span class="stack-tag">BERT</span><span class="stack-tag">GPT-2</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon">🏦</div>
+          <div class="project-links">
+            <span class="project-confidential"><i class="fas fa-lock"></i> Confidentiel</span>
+          </div>
+        </div>
+        <div class="project-name">Système d'Archivage Électronique — Banque d'Algérie</div>
+        <p class="project-desc">Développement d'une solution d'archivage électronique pour la Banque Centrale d'Algérie. Gestion du cycle de vie des documents, workflows de validation, recherche full-text et traçabilité des opérations.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Spring Boot</span><span class="stack-tag">React</span>
+          <span class="stack-tag">PostgreSQL</span><span class="stack-tag">Java</span>
         </div>
       </div>
 
