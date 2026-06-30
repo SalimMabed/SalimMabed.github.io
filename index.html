@@ -2145,6 +2145,9 @@ window.addEventListener('scroll', () => {
 
 // ── LinkedIn latest post ──
 (function () {
+  // ← remplace par ton URL Vercel après le déploiement
+  const VERCEL_URL = 'https://linkedin-proxy-salim.vercel.app/api/post';
+
   const card    = document.getElementById('linkedin-post-card');
   const loading = document.getElementById('linkedin-post-loading');
   const textEl  = document.getElementById('linkedin-post-text');
@@ -2153,7 +2156,7 @@ window.addEventListener('scroll', () => {
   const reactEl = document.getElementById('linkedin-reactions');
   const reactCount = document.getElementById('linkedin-reactions-count');
 
-  fetch('latest-post.json?t=' + Date.now())
+  fetch(VERCEL_URL)
     .then(r => r.json())
     .then(data => {
       loading.style.display = 'none';
